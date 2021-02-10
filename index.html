@@ -1,7 +1,71 @@
 <!DOCTYPE html>
-<html>
+<!-- saved from url=(0067)https://cdn.livestream.com/LivestreamStudio/tools/studio-build.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Studio</title>
+    <style>
+        label {
+            display: block;
+            margin: 0.4em;
+        }
+    </style>
+</head>
 <body>
-<h1>You're good to go</h1>
-<img src="8kYfRZM.png" alt="cat with thumbs up.png">
-</body>
-</html>
+
+<form>
+    <label>Account ID: <input type="text" name="account_id" required="" ></label>
+    <label>Licenses: <input type="text" name="licenses"></label>
+    <label>Token: <input type="text" name="token" required=""></label>
+</form>
+<br>
+<button onclick="get()">Get</button> <button onclick="add()">Edit</button>
+<br>
+<br>
+<br>
+<textarea id="response" style="font-size: 24; color: red;"></textarea>
+
+<script>
+	function get() {
+		inputs = document.forms[0].elements;
+		var formData = {};
+        for (var i = 0, length = inputs.length; i < length; i++) {
+            formData[inputs[i].name] = inputs[i].value;
+        }
+		
+		url = "https://studio-sub-manager.vimeows.com/exception?accountID="+formData["account_id"]+"&t="+formData["token"];
+		console.log(url);
+		
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( "GET", url, true );
+		xmlHttp.onload = function () {
+			const timeElapsed = Date.now();
+			const now = new Date(timeElapsed);
+			document.getElementById('response').innerHTML += "\n"+now.toISOString()+"\t"+xmlHttp.response;
+		};
+		xmlHttp.send( null );		
+	}
+	
+	function add() {
+		inputs = document.forms[0].elements;
+		var formData = {};
+        for (var i = 0, length = inputs.length; i < length; i++) {
+            formData[inputs[i].name] = inputs[i].value;
+        }
+		
+		url = "https://studio-sub-manager.vimeows.com/exception?accountID="+formData["account_id"]+"&licenses="+formData["licenses"]+"&t="+formData["token"];
+		console.log(url);
+		
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open( "POST", url, true );
+		xmlHttp.onload = function () {
+			const timeElapsed = Date.now();
+			const now = new Date(timeElapsed);
+			document.getElementById('response').innerHTML += "\n"+now.toISOString()+"\t"+xmlHttp.response;
+		};
+		xmlHttp.send( null );		
+	}
+</script>
+
+</body></html>
