@@ -17,9 +17,7 @@
 
 <form>
 <label>Account ID (numbers only): <input type="number" id="account_id" required="" style="display: block; margin: 0.4em;"></label>
-<input type="radio" id="vimeo" name="type" value="vimeo" checked=true>
-<label for="vimeo">vimeo</label>
-<input type="radio" id="livestream" name="type" value="livestream">
+<input type="radio" id="livestream" name="type" value="livestream" checked=true>
 <label for="livestream">livestream</label>
 <br>
 <label>Licenses: <input type="text" id="licenses" style="display: block; margin: 0.4em;"></label>
@@ -38,12 +36,6 @@
 		account_id = document.getElementById("account_id").value;
 		licenses = document.getElementById("licenses").value;
 		token = document.getElementById("token").value;
-		
-		is_vimeo = document.getElementById("vimeo").checked;
-		
-		if (is_vimeo) {
-			account_id = "/users/" + account_id;
-		}
 				
 		url = "https://studio-sub-manager.vimeows.com/exception?accountID="+account_id+"&t="+token;
 		
@@ -61,12 +53,6 @@
 		account_id = document.getElementById("account_id").value;
 		licenses = document.getElementById("licenses").value;
 		token = document.getElementById("token").value;
-		
-		is_vimeo = document.getElementById("vimeo").checked;
-		
-		if (is_vimeo) {
-			account_id = "/users/" + account_id;
-		}
 		
 		url = "https://studio-sub-manager.vimeows.com/exception?accountID="+account_id+"&licenses="+licenses+"&t="+token;
 		
